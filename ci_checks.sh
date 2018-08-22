@@ -36,7 +36,7 @@ GOTEST_FAIL=$?
 echo
 
 echo "### GolangCI-Lint"
-golangci-lint run --enable-all
+golangci-lint run --enable-all ${GOLANGCI_LINT_DISABLE_CHECKS}
 GOLANGCI_LINT_FAIL=$?
 echo
 
