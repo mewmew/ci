@@ -41,11 +41,6 @@ go test -race ./...
 GOTEST_RACE_FAIL=$?
 echo
 
-echo "### GolangCI-Lint"
-golangci-lint run --enable-all
-GOLANGCI_LINT_FAIL=$?
-echo
-
 if [ "${COVERALLS_TOKEN}" ]; then
 	echo "### go tool cover"
 	go test -covermode=count -coverprofile=coverage.out ./...
@@ -55,6 +50,11 @@ if [ "${COVERALLS_TOKEN}" ]; then
 	# (https://github.com/mattn/goveralls)
 	goveralls -coverprofile coverage.out -service travis-ci -repotoken ${COVERALLS_TOKEN}
 fi
+
+echo "### GolangCI-Lint"
+golangci-lint run --enable-all
+GOLANGCI_LINT_FAIL=$?
+echo
 
 RET=0
 if [ ${GOFMT_FAIL} -eq 1 ] ; then
