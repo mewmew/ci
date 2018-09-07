@@ -47,7 +47,7 @@ GOLANGCI_LINT_FAIL=$?
 echo
 
 if [ "${COVERALLS_TOKEN}" ]; then
-	echo "### Code coverage"
+	echo "### go tool cover"
 	go test -covermode=count -coverprofile=coverage.out ./...
 	go tool cover -func coverage.out
 
