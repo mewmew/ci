@@ -6,9 +6,10 @@
 #    2. goimports     (http://godoc.org/golang.org/x/tools/cmd/goimports)
 #    3. golint        (https://github.com/golang/lint)
 #    4. go vet        (http://golang.org/cmd/vet)
-#    5. race detector (http://blog.golang.org/race-detector)
-#    6. test coverage (http://blog.golang.org/cover)
-#    7. GolangCI-Lint (https://github.com/golangci/golangci-lint)
+#    5. go test
+#    6. race detector (http://blog.golang.org/race-detector)
+#    7. test coverage (http://blog.golang.org/cover)
+#    8. GolangCI-Lint (https://github.com/golangci/golangci-lint)
 
 echo "### gofmt"
 test -z "$(find . -type f -name '*.go' -print0 | xargs -0 gofmt -l -s  | tee /dev/stderr)"
@@ -30,9 +31,14 @@ go vet ./...
 GOVET_FAIL=$?
 echo
 
+echo "### go test"
+go test ./...
+GOTEST_FAIL=$?
+echo
+
 echo "### go test -race"
 go test -race ./...
-GOTEST_FAIL=$?
+GOTEST_RACE_FAIL=$?
 echo
 
 echo "### GolangCI-Lint"
@@ -79,6 +85,12 @@ if [ ${GOTEST_FAIL} -eq 1 ] ; then
 	RET=1
 else
 	echo "go test:       PASS"
+fi
+if [ ${GOTEST_RACE_FAIL} -eq 1 ] ; then
+	echo "go test -race: FAIL"
+	RET=1
+else
+	echo "go test -race: PASS"
 fi
 if [ ${GOLANGCI_LINT_FAIL} -eq 1 ] ; then
 	echo "GolangCI-Lint: FAIL"
