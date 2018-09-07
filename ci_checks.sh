@@ -6,7 +6,7 @@
 #    2. goimports     (http://godoc.org/golang.org/x/tools/cmd/goimports)
 #    3. golint        (https://github.com/golang/lint)
 #    4. go vet        (http://golang.org/cmd/vet)
-#    5. go test
+#    5. go test       (https://golang.org/cmd/go/#hdr-Test_packages)
 #    6. race detector (http://blog.golang.org/race-detector)
 #    7. test coverage (http://blog.golang.org/cover)
 #    8. GolangCI-Lint (https://github.com/golangci/golangci-lint)
