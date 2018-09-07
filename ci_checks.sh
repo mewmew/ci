@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# The script performs a set of checks on a Go package and its sub-packages:
+# This script performs a set of checks on a Go package and its sub-packages:
 #
 #    1. gofmt         (http://golang.org/cmd/gofmt/)
 #    2. goimports     (http://godoc.org/golang.org/x/tools/cmd/goimports)
@@ -36,7 +36,7 @@ GOTEST_FAIL=$?
 echo
 
 echo "### GolangCI-Lint"
-golangci-lint run --enable-all ${GOLANGCI_LINT_DISABLE_CHECKS}
+golangci-lint run --enable-all
 GOLANGCI_LINT_FAIL=$?
 echo
 
