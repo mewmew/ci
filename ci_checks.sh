@@ -99,4 +99,5 @@ if [ ${GOLANGCI_LINT_FAIL} -eq 1 ] ; then
 else
 	echo "GolangCI-Lint: PASS"
 fi
+echo "ret: ${RET}"
 exit ${RET}
