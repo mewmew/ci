@@ -71,7 +71,7 @@ else
 fi
 if [ ${GOLINT_FAIL} -eq 1 ] ; then
 	echo "golint:        FAIL"
-	RET=1
+	#RET=1
 else
 	echo "golint:        PASS"
 fi
@@ -95,7 +95,7 @@ else
 fi
 if [ ${GOLANGCI_LINT_FAIL} -eq 1 ] ; then
 	echo "GolangCI-Lint: FAIL"
-	RET=1
+	#RET=1
 else
 	echo "GolangCI-Lint: PASS"
 fi
