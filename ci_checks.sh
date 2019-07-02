@@ -51,6 +51,7 @@ if [ "${COVERALLS_TOKEN}" ]; then
 	goveralls -coverprofile coverage.out -service travis-ci -repotoken ${COVERALLS_TOKEN}
 fi
 
+GOLANGCI_LINT_FAIL=0
 if [ -x "$(command -v golangci-lint)" ]; then
 	echo "### GolangCI-Lint"
 	golangci-lint run --enable-all
