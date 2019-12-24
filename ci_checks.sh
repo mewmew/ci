@@ -44,10 +44,12 @@ go test ./...
 GOTEST_FAIL=$?
 echo
 
-echo "### go test -race"
-go test -race ./...
-GOTEST_RACE_FAIL=$?
-echo
+if [ "${GOTEST_RACE-}" != 0 ]; then
+	echo "### go test -race"
+	go test -race ./...
+	GOTEST_RACE_FAIL=$?
+	echo
+fi
 
 if [ "${COVERALLS_TOKEN}" ]; then
 	echo "### go tool cover"
