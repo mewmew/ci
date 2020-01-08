@@ -70,20 +70,20 @@ if [ -x "$(command -v golangci-lint)" ]; then
 fi
 
 RET=0
-if [ ${GOFMT_FAIL} -ne 0 ]; then
+if [ ${GOFMT_FAIL} -eq 0 ]; then
 	echo "gofmt:         PASS"
 else
 	echo "gofmt:         FAIL"
 	RET=1
 fi
-if [ ${GOIMPORTS_FAIL} -ne 0 ]; then
+if [ ${GOIMPORTS_FAIL} -eq 0 ]; then
 	echo "goimports:     PASS"
 else
 	echo "goimports:     FAIL"
 	RET=1
 fi
 if [ -f .revive.toml ]; then
-	if [ ${REVIVE_FAIL} -ne 0 ]; then
+	if [ ${REVIVE_FAIL} -eq 0 ]; then
 		echo "revive:        PASS"
 	else
 		echo "revive:        FAIL"
@@ -92,7 +92,7 @@ if [ -f .revive.toml ]; then
 		RET=1
 	fi
 else
-	if [ ${GOLINT_FAIL} -ne 0 ]; then
+	if [ ${GOLINT_FAIL} -eq 0 ]; then
 		echo "golint:        PASS"
 	else
 		echo "golint:        FAIL"
@@ -100,25 +100,25 @@ else
 		#RET=1
 	fi
 fi
-if [ ${GOVET_FAIL} -ne 0 ]; then
+if [ ${GOVET_FAIL} -eq 0 ]; then
 	echo "go vet:        PASS"
 else
 	echo "go vet:        FAIL"
 	RET=1
 fi
-if [ ${GOTEST_FAIL} -ne 0 ]; then
+if [ ${GOTEST_FAIL} -eq 0 ]; then
 	echo "go test:       PASS"
 else
 	echo "go test:       FAIL"
 	RET=1
 fi
-if [ ${GOTEST_RACE_FAIL} -ne 0 ]; then
+if [ ${GOTEST_RACE_FAIL} -eq 0 ]; then
 	echo "go test -race: PASS"
 else
 	echo "go test -race: FAIL"
 	RET=1
 fi
-if [ ${GOLANGCI_LINT_FAIL} -ne 0 ]; then
+if [ ${GOLANGCI_LINT_FAIL} -eq 0 ]; then
 	echo "GolangCI-Lint: PASS"
 else
 	echo "GolangCI-Lint: FAIL"
