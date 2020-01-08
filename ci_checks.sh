@@ -70,60 +70,60 @@ if [ -x "$(command -v golangci-lint)" ]; then
 fi
 
 RET=0
-if [ ${GOFMT_FAIL} -eq 1 ]; then
+if [ ${GOFMT_FAIL} -ne 0 ]; then
+	echo "gofmt:         PASS"
+else
 	echo "gofmt:         FAIL"
 	RET=1
-else
-	echo "gofmt:         PASS"
 fi
-if [ ${GOIMPORTS_FAIL} -eq 1 ]; then
+if [ ${GOIMPORTS_FAIL} -ne 0 ]; then
+	echo "goimports:     PASS"
+else
 	echo "goimports:     FAIL"
 	RET=1
-else
-	echo "goimports:     PASS"
 fi
 if [ -f .revive.toml ]; then
-	if [ ${REVIVE_FAIL} -eq 1 ]; then
+	if [ ${REVIVE_FAIL} -ne 0 ]; then
+		echo "revive:        PASS"
+	else
 		echo "revive:        FAIL"
 		# We do consider a revive lint failure a CI failure, since we can disable
 		# specific rules using the .revive.toml config.
 		RET=1
-	else
-		echo "revive:        PASS"
 	fi
 else
-	if [ ${GOLINT_FAIL} -eq 1 ]; then
+	if [ ${GOLINT_FAIL} -ne 0 ]; then
+		echo "golint:        PASS"
+	else
 		echo "golint:        FAIL"
 		# We don't consider a golint failure a CI failure.
 		#RET=1
-	else
-		echo "golint:        PASS"
 	fi
 fi
-if [ ${GOVET_FAIL} -eq 1 ]; then
+if [ ${GOVET_FAIL} -ne 0 ]; then
+	echo "go vet:        PASS"
+else
 	echo "go vet:        FAIL"
 	RET=1
-else
-	echo "go vet:        PASS"
 fi
-if [ ${GOTEST_FAIL} -eq 1 ]; then
+if [ ${GOTEST_FAIL} -ne 0 ]; then
+	echo "go test:       PASS"
+else
 	echo "go test:       FAIL"
 	RET=1
-else
-	echo "go test:       PASS"
 fi
-if [ ${GOTEST_RACE_FAIL} -eq 1 ]; then
+if [ ${GOTEST_RACE_FAIL} -ne 0 ]; then
+	echo "go test -race: PASS"
+else
 	echo "go test -race: FAIL"
 	RET=1
-else
-	echo "go test -race: PASS"
 fi
-if [ ${GOLANGCI_LINT_FAIL} -eq 1 ]; then
+if [ ${GOLANGCI_LINT_FAIL} -ne 0 ]; then
+	echo "GolangCI-Lint: PASS"
+else
 	echo "GolangCI-Lint: FAIL"
 	# We don't consider a Golang-CI lint failure a CI failure.
 	#RET=1
-else
-	echo "GolangCI-Lint: PASS"
 fi
 echo "ret: ${RET}"
 exit ${RET}
